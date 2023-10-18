@@ -9,15 +9,20 @@ public class Day1_3 {
 
         Solution sol = new Solution();
 
-        String input1 = "one4seveneight";
+//        String input1 = "one4oneseveneight";
         String input2 = "23four5six7";
         String input3 = "2three45sixseven";
         String input4 = "123";
 
-        int solution = sol.solution(input1);
+//        int solution = sol.solution(input1);
         int solution1 = sol.solution(input2);
         int solution2 = sol.solution(input3);
         int solution3 = sol.solution(input4);
+
+//        System.out.println("solution = " + solution);
+        System.out.println("solution1 = " + solution1);
+        System.out.println("solution2 = " + solution2);
+        System.out.println("solution3 = " + solution3);
 
     }
 
@@ -57,11 +62,37 @@ public class Day1_3 {
                 if(s.contains(strArr[i])){
                     indexArr.add(s.indexOf(strArr[i]));
                     stringArr.add(strArr[i]);
+
+                    StringBuilder sb2 = new StringBuilder();
+                    String[] split = s.split(strArr[i], 1);
+
+                    System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
+
+                    sb2.append(Arrays.toString(split));
+
+//                    sb2.append(split[0]);
+//                    sb2.append(split[1]);
+                    s = sb2.toString();
+
+                    i--;
                 }
 
                 if(s.contains(String.valueOf(i))){
                     indexArr.add(s.indexOf(String.valueOf(i)));
                     stringArr.add(String.valueOf(i));
+
+                    StringBuilder sb2 = new StringBuilder();
+                    String[] split = s.split(String.valueOf(i), 1);
+
+                    System.out.println("Arrays.toString(split) = " + Arrays.toString(split));
+
+                    sb2.append(Arrays.toString(split));
+
+//                    sb2.append(split[0]);
+//                    sb2.append(split[1]);
+                    s = sb2.toString();
+
+                    i--;
                 }
 
             }
@@ -77,6 +108,38 @@ public class Day1_3 {
             }
 
             int answer = Integer.parseInt(sb.toString());
+
+            return answer;
+        }
+
+        public int solution2(String s) {
+
+            Map<String, String> engToNumMap = new HashMap<>();
+
+            engToNumMap.put("zero", "0");
+            engToNumMap.put("one", "1");
+            engToNumMap.put("two", "2");
+            engToNumMap.put("three", "3");
+            engToNumMap.put("four", "4");
+            engToNumMap.put("five", "5");
+            engToNumMap.put("six", "6");
+            engToNumMap.put("seven", "7");
+            engToNumMap.put("eight", "8");
+            engToNumMap.put("nine", "9");
+
+            String[] strArr = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+
+            for(int i=0; i< strArr.length; i++){
+
+                if(s.contains(strArr[i])){
+                    String[] split = s.split(strArr[i]);
+                    System.out.println("split = " + Arrays.toString(split));
+                }
+
+
+            }
+
+            int answer = 0;
 
             return answer;
         }
