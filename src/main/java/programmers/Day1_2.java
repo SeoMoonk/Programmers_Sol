@@ -1,8 +1,6 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Day1_2 {
 
@@ -47,31 +45,16 @@ public class Day1_2 {
             }
 
             for(int i=0; i<completion.length; i++) {
+                //ArrayList의 remove는 동명이인을 한번에 날려버리지는 않는다.
                 arr.remove(completion[i]);
             }
 
             String answer = arr.get(0);
+
             return answer;
         }
 
         public String solution2(String[] participant, String[] completion) {
-
-            String answer = "";
-
-            List<String> list = Arrays.stream(completion).toList();
-
-            //돔명이인 처리 불가
-            for(String s : participant) {
-                if(!list.contains(s)){
-                    answer = s;
-                    break;
-                }
-            }
-
-            return answer;
-        }
-
-        public String solution3(String[] participant, String[] completion) {
 
             String answer = "";
 
@@ -81,6 +64,30 @@ public class Day1_2 {
                 //못지운다 => 완주를 못했다
                 if(!compList.remove(p)){
                     answer = p;
+                }
+            }
+            return answer;
+        }
+
+        public String solution3(String[] participant, String[] completion) {
+
+            String answer = "";
+            HashMap<String, Integer> myMap = new HashMap<>();
+
+            for(String part : participant) {
+                //새로운 인물이라면 디폴트 값인 0으로 넣고, 이미 존재하는 인물은 +1된 값을 맵에 넣음.
+                myMap.put(part, myMap.getOrDefault(part, 0)+1);
+            }
+
+            for(String comp : completion){
+                //remove 혹은 replace를 쓰면 안되는 이유 -> 동명이인 두명이 한 큐에 다 날아가버림.
+                myMap.put(comp, myMap.get(comp)-1);
+            }
+
+            for (String key : myMap.keySet()) {
+                if (myMap.get(key) != 0) {
+                    answer = key;
+                    break;
                 }
             }
             return answer;
