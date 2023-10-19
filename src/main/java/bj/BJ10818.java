@@ -23,7 +23,6 @@ public class BJ10818 {
 
             //토큰을 배열에 저장하지 말고, 바로바로 대소 비교를 하자!!
             int num = Integer.parseInt(st.nextToken());
-
             //if 문으로 <, > 비교할 필요가 없다
             maxtmp = Math.max(num, maxtmp);
             mintmp = Math.min(num, mintmp);
