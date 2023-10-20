@@ -1,9 +1,8 @@
 package programmers;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-public class Day1_3 {
+public class PG81301 {
 
     public static void main(String[] args) {
 

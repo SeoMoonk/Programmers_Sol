@@ -1,10 +1,8 @@
 package programmers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Day1_1 {
+public class PG120888 {
 
     public static void main(String[] args) {
 

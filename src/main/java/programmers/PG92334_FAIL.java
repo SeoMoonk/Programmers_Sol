@@ -2,9 +2,7 @@ package programmers;
 
 import java.util.*;
 
-import static java.util.Collections.swap;
-
-public class Day1_4 {
+public class PG92334_FAIL {
 
     public static void main(String[] args) {
 

@@ -2,7 +2,7 @@ package programmers;
 
 import java.util.*;
 
-public class Day1_2 {
+public class PG42576 {
 
     public static void main(String[] args) {
 
