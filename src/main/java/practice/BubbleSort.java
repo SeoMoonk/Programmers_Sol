@@ -2,7 +2,7 @@ package practice;
 
 import java.util.Arrays;
 
-public class bubbleSort {
+public class BubbleSort {
 
     static int[][] nums = {{4, 4, 16}, {6, 1, 6}, {4, 3, 12}, {1, 12, 12}, {5, 4, 20}, {2, 3, 6}, {3, 4, 12}};
 

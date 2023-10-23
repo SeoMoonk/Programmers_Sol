@@ -2,7 +2,7 @@ package practice;
 
 import java.util.Arrays;
 
-public class countingSort {
+public class CountingSort {
 
     static int[] nums = {4, 4, 2, 3, 5, 5, 1, 1, 5};
     static int[] count;

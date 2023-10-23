@@ -2,7 +2,7 @@ package practice;
 
 import java.util.Arrays;
 
-public class selectionSort {
+public class SelectionSort {
 
     static int[] nums = {10, 15, 2, 19, 6, 14};
 
