@@ -9,9 +9,10 @@ public class PG86971_TODO {
 
     static StringBuilder sb = new StringBuilder();
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static int[][] adj;
+    static int[][] adjArr;
     static int V, E;
-    static ArrayList<Integer> track;
+    static boolean[] visited;
+    static int result;
 
     public static void main(String[] args) {
 
@@ -20,9 +21,9 @@ public class PG86971_TODO {
 
         Solution sol = new Solution();
 
-        int result = sol.solution(n1, wires1);
+        int solResult = sol.solution(n1, wires1);
 
-        System.out.println("result = " + result);
+        System.out.println("result = " + solResult);
 
     }
 
@@ -30,35 +31,61 @@ public class PG86971_TODO {
         public int solution(int n, int[][] wires) {
             int answer = -1;
 
-            adj = new int[n + 1][n + 1];
+            V = n;
+            E = wires.length;
 
-            String str = Arrays.deepToString(wires);
+            adjArr = new int[n+1][n+1];
+            visited = new boolean[n+1];
 
-            str = str.replace("[", "");
-            str = str.replace("]", "");
-            str = str.replace(" ", "");
-            str = str.trim();
-            String[] split = str.split(",");
+            //인접행렬 만들기
+            for(int i=0; i<E; i++) {
+                int front = wires[i][0];
+                int end = wires[i][1];
 
-            System.out.println("split = " + Arrays.toString(split));
-
-            for(int i=0; i<split.length; i=i+2) {
-
-                int di = Integer.parseInt(split[i]);
-                int dj = Integer.parseInt(split[i + 1]);
-
-                adj[di][dj] = 1;
-                adj[dj][di] = 1;
+                adjArr[front][end] = 1;
+                adjArr[end][front] = 1;
             }
 
-            for (int i = 0; i < adj.length; i++) {
-                for (int j = 0; j < adj.length; j++) {
-                    System.out.print(adj[i][j] + " ");
-                }
-                System.out.println();
+            for(int i=0; i< E; i++) {
+
+                //주어진 트리 정보에서 간선을 하나씩 끊어보기
+                int target1 = wires[i][0];
+                int target2 = wires[i][1];
+
+                adjArr[target1][target2] = 0;
+                adjArr[target2][target1] = 0;
+
+                //dfs 순회하여 이번에 얻은 값 갱신 (최솟값으로)
+                answer = Math.min(answer, dfs(1));
+
+                //다시 되돌려 놓기
+                adjArr[target1][target2] = 1;
+                adjArr[target2][target1] = 1;
+                result = 0;
+
             }
 
             return answer;
+        }
+
+        public int dfs(int start) {
+
+            //V(노드의 갯수) = n (9개)
+            //E(간선의 갯수) = wires.length(8개)
+
+            if(!visited[start]) {
+                visited[start] = true;
+            }
+
+            for(int destination = 1; destination < V+1; destination++) {
+
+                if (!visited[destination] && adjArr[start][destination] == 1) {
+                    dfs(destination);
+                    result++;
+                }
+            }
+
+            return result;
         }
     }
 }
