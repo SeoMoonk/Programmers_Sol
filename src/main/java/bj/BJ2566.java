@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BOJ2566 {
+public class BJ2566 {
 
     static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int MAX_VALUE = -1;
