@@ -9,8 +9,8 @@ public class BOJ2566 {
 
     static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int MAX_VALUE = -1;
-    static int I;
-    static int J;
+    static int row;
+    static int column;
 
     public static void main(String[] args) throws IOException {
 
@@ -25,13 +25,13 @@ public class BOJ2566 {
 
                 if(MAX_VALUE < num) {
                     MAX_VALUE = num;
-                    I = i+1;
-                    J = j+1;
+                    row = i+1;
+                    column = j+1;
                 }
             }
         }
 
         System.out.println(MAX_VALUE);
-        System.out.printf("%d %d", I, J);
+        System.out.printf("%d %d", row, column);
     }
 }
