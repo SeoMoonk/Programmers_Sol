@@ -6,41 +6,45 @@ import java.io.InputStreamReader;
 
 public class BJ1913 {
 
-    static StringBuilder sb = new StringBuilder();
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static int N;
-    static int target;
+    static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static int N;       //표의 크기
+    static int K;       //찾으려는 숫자
     static int[][] snail;
-    static int r = 0, c = 0, d = 0;
-    static final int[] dr = {1, 0, -1, 0};
-    static final int[] dc = {0, 1, 0, -1};
-    static int targetR = -1;
-    static int targetC = -1;
+    static int[] directionR = {1, 0, -1, 0};
+    static int[] directionC = {0, 1, 0, -1};
+    static int r = 0, c = 0, direction = 0;
+    static int targetR = 0, targetC = 0;
+    static boolean hasFound = false;
 
     public static void main(String[] args) throws IOException {
 
         N = Integer.parseInt(br.readLine());
-        target = Integer.parseInt(br.readLine());
-        snail = new int[N][N];  //배열을 그리고, 내부를 0으로 모두 초기화
+        K = Integer.parseInt(br.readLine());
 
-        for(int i = N*N; i > 0; i--) {
-            //달팽이가 있는 곳에 기록
+        snail = new int[N][N];
+
+        for (int i = N * N; i > 0; i--) {
+
             snail[r][c] = i;
 
-            //다음 진행 좌표가 어디인지 계산
-            int nr = r + dr[d];
-            int nc = c + dc[d];
-
-            //달팽이의 다음 좌표가 맵 밖으로 나가려고 하는가? + 단축연산
-            if(nc < 0 || nc >= N || nr < 0 || nr >= N || snail[nr][nc] != 0) {
-                //나가려 하거나 이미 값이 있는 곳으로 가려고 한다면 좌표를 다시 계산.
-                d = (d+1) % 4;
-                nr = r + dr[d];
-                nc = c + dc[d];
+            if (!hasFound && i == K) {
+                targetR = r + 1;
+                targetC = c + 1;
             }
-            //위에서 조절한 좌표를 확정 지음.
-            r = nr;
-            c = nc;
+
+            //다음 경로에 대해 생각해 봄.
+            int nextRow = r + directionR[direction];
+            int nextCol = c + directionC[direction];
+
+            //밖으로 나가거나, 이미 숫자가 있는 경우 방향 변경
+            if (nextRow == N || nextCol == N || nextRow == -1 || nextCol == -1 || snail[nextRow][nextCol] != 0) {
+                direction = direction == 3 ? 0 : direction + 1;
+                nextRow = r + directionR[direction];
+                nextCol = c + directionC[direction];
+            }
+
+            r = nextRow;
+            c = nextCol;
         }
 
         print(snail);
@@ -48,20 +52,17 @@ public class BJ1913 {
 
     static void print(int[][] snail) {
 
-        for(int i=0; i<snail.length; i++) {
-            for(int j=0; j<snail.length; j++) {
+        StringBuilder sb = new StringBuilder();
 
-                if(snail[i][j] == target) {
-                    targetR = i + 1;
-                    targetC = j + 1;
-                }
+        for(int i=0; i<N; i++) {
+            for(int j=0; j<N; j++) {
                 sb.append(snail[i][j] + " ");
             }
             sb.append("\n");
         }
-        sb.append(targetR + " " + targetC);
+
+        sb.append("%d %d".formatted(targetR, targetC));
 
         System.out.println(sb.toString());
     }
-
 }
