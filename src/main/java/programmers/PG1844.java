@@ -95,6 +95,8 @@ public class PG1844 {
                 int curR = current[0];
                 int curC = current[1];
 
+                //visited를 여기서 true로 변경하면 시간 초과가 발생
+
                 //목적지에 도달하면 바로 나가기 (queue clear + break)
                 if (curR == n - 1 && curC == m - 1) {
                     flag = true;
@@ -116,6 +118,7 @@ public class PG1844 {
                         continue;
                     }
 
+                    //여기에서 확실히 갈 수 있을 때 visited를 바꿔야 시간 초과가 안 남.
                     visited[nr][nc] = true;
                     queue.addLast(new int[]{nr, nc});
                 }
