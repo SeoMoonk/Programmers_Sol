@@ -43,8 +43,7 @@ public class 마을_최대_크기 {
 
     static int dfs(int r, int c) {
 
-        int cnt = 1;
-        arr[r][c] = 0;
+        int cnt = 0;
 
         // { row, column } 쌍을 배열로 해서 스택에 집어넣기!
 
@@ -56,6 +55,10 @@ public class 마을_최대_크기 {
             int[] current = stack.removeLast();
             int curR = current[0];
             int curC = current[1];
+
+            //visited 처리
+            arr[curR][curC] = 0;
+            cnt++;
 
             //현재 위치에서, 4 방향을 전부 돌면서
             for(int i=0; i<4; i++) {
