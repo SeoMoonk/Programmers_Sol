@@ -11,7 +11,7 @@ public class PG1844 {
     static int[] dc = {0, 1, 0, -1};
     static boolean[][] visited;
     static boolean flag;
-    static int dist = 0;
+    static int dist;
 
     public static int solution(int[][] maps) {
 
@@ -20,38 +20,89 @@ public class PG1844 {
         n = maps.length;
         m = maps[0].length;
 
+//        dfs(maps);
         bfs(maps);
 
-        if(flag) {
-            return dist;
-        }
-
-        return answer;
+        return flag ? dist : answer;
     }
 
-    public static void bfs(int[][] maps) {
+    public static int dfs(int[][] maps) {
+
+        ArrayDeque<int[]> stack = new ArrayDeque<>();
+        stack.addLast(new int[]{0,0});
+        visited = new boolean[n][m];
+        visited[0][0] = true;
+        flag = false;
+        dist = 0;
+
+        while(!stack.isEmpty()) {
+
+            int size = stack.size();
+
+            for(int i=0; i<size; i++) {
+
+                int[] current = stack.removeLast();
+                int curR = current[0];
+                int curC = current[1];
+
+                if(curR == n-1 && curC == m-1) {
+                    flag=true;
+                    stack.clear();
+                    break;
+                }
+
+                for(int j=0; j<4; j++) {
+
+                    int nr = curR + dr[j];
+                    int nc = curC + dc[j];
+
+                    if(nr<0 || nr == n || nc < 0 || nc == m) {
+                        continue;
+                    }
+
+                    if(maps[nr][nc] == 0 || visited[nr][nc]) {
+                        continue;
+                    }
+
+                    visited[nr][nc] = true;
+                    stack.addLast(new int[]{nr,nc});
+                }
+            }
+
+            dist++;
+        }
+
+        return dist;
+    }
+
+    public static int bfs(int[][] maps) {
 
         ArrayDeque<int[]> queue = new ArrayDeque<>();
         queue.addLast(new int[]{0, 0});
         visited = new boolean[n][m];
         visited[0][0] = true;
         flag = false;
+        dist = 0;
 
         while (!queue.isEmpty()) {
 
             int size = queue.size();
 
             for (int i = 0; i < size; i++) {
+                
+                //갈 수 있는 곳을 모두 탐색
                 int[] current = queue.removeFirst();
                 int curR = current[0];
                 int curC = current[1];
 
+                //목적지에 도달하면 바로 나가기 (queue clear + break)
                 if (curR == n - 1 && curC == m - 1) {
                     flag = true;
                     queue.clear();
                     break;
                 }
 
+                //4방향을 탐색하면서, 갈 수 있는 곳들을 모두 스택에 집어넣음 (+ 방문처리)
                 for (int j = 0; j < 4; j++) {
 
                     int nr = curR + dr[j];
@@ -71,6 +122,8 @@ public class PG1844 {
             }
             dist++;
         }
+
+        return dist;
     }
 
     public static void main(String[] args) throws IOException {
