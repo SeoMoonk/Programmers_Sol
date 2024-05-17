@@ -16,6 +16,8 @@ public class MethodSort {
     static ArrayList<String> strList = new ArrayList<>(Arrays.asList("7", "14", "1", "3", "5"));
     static ArrayList<String> wordList = new ArrayList<>(Arrays.asList("cat", "apple", "dog", "apex", "cap"));
 
+    static int[][] doubleNums = {{4, 4, 16}, {6, 1, 6}, {4, 3, 12}, {1, 12, 12}, {5, 4, 20}, {2, 3, 6}, {3, 4, 12}};
+
     public static void main(String[] args) {
 
         Arrays.sort(nums);
@@ -46,6 +48,10 @@ public class MethodSort {
 
         wordList.sort(Comparator.naturalOrder());
         System.out.println(wordList);
+
+        Arrays.sort(doubleNums, ((o1, o2) -> o1[0] != o2[0] ? o1[0] - o2[0] : o1[1] - o2[1]));
+        System.out.println(Arrays.deepToString(doubleNums));
+
     }
 
 }
