@@ -26,26 +26,23 @@ public class BJ1182 {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        if(arr[N-1] == S) {
-            count++;
-        }
+        for(int i=0; i<1<<N; i++) {
 
-        if(arr[0] == S) {
-            count++;
-        }
+            int temp = 0;
 
-        for(int i=0; i<N-1; i++) {
-
-            int base = 0;
-
-            for(int j=i; j<N; j++) {
-                base = base + arr[j];
-
-                if(base == S) {
-                    count++;
+            for(int j=0; j<N; j++) {
+                if ((i&(1<<j)) != 0) {
+                    temp += arr[j];
                 }
             }
 
+            if(temp == S) {
+                count++;
+            }
+        }
+
+        if(S == 0) {
+            count--;
         }
 
         System.out.println(count);
