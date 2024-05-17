@@ -28,7 +28,8 @@ public class 부분집합_재귀 {
             }
 
             if(result.size() != 0) {
-                System.out.println(result);
+
+                 System.out.println(result);
             }
 
             return;
@@ -43,3 +44,4 @@ public class 부분집합_재귀 {
 
     }
 }
+
