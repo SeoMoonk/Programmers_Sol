@@ -1,4 +1,4 @@
-package interview;
+package interview.string_processing_6;
 
 import java.io.IOException;
 import java.util.Arrays;
